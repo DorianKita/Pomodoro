@@ -11,7 +11,18 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps = 0
-# ---------------------------- TIMER RESET ------------------------------- # 
+timer = None
+# ---------------------------- TIMER RESET ------------------------------- #
+
+def reset_timer():
+    global reps
+    if timer != None:
+        window.after_cancel(timer)
+
+    canvas.itemconfig(timer_text, text="00:00")
+    label.config(text="Timer", fg=GREEN)
+    checkmark.config(text="")
+    reps = 0
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
@@ -44,7 +55,8 @@ def count_down(count):
 
     canvas.itemconfig(timer_text, text= f"{floor(count_min)}:{count_sec}")
     if count > 0:
-        window.after(1000, count_down, count -1)
+        global timer
+        timer = window.after(1000, count_down, count -1)
     else:
         mark = ""
         start_timer()
@@ -70,7 +82,7 @@ label.grid(row= 0, column= 1)
 start_button = tkinter.Button(text="Start",highlightthickness=0, height=2, command=start_timer)
 start_button.grid(row= 2, column=0)
 
-reset_button = tkinter.Button(text="Reset",highlightthickness=0, height=2)
+reset_button = tkinter.Button(text="Reset",highlightthickness=0, height=2, command=reset_timer)
 reset_button.grid(row= 2, column=2)
 
 checkmark = tkinter.Label(foreground=GREEN, bg=YELLOW, font=(FONT_NAME, 30, "normal"))
