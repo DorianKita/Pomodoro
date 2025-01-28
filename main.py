@@ -1,4 +1,6 @@
 import tkinter
+from math import floor
+
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -12,11 +14,18 @@ CHECKMARK = "✔"
 
 # ---------------------------- TIMER RESET ------------------------------- # 
 
-# ---------------------------- TIMER MECHANISM ------------------------------- # 
+# ---------------------------- TIMER MECHANISM ------------------------------- #
+
+def start_timer():
+    count_down(5 * 60)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
-    canvas.itemconfig(timer_text, text= count)
+
+    count_min = count / 60
+    count_sec = count % 60
+    print(count_min, count_sec)
+    canvas.itemconfig(timer_text, text= f"{floor(count_min)}:{floor(count_sec)}")
     if count > 0:
         window.after(1000, count_down, count -1)
 
@@ -37,7 +46,7 @@ canvas.grid(row= 1, column= 1)
 label = tkinter.Label(text="Timer", fg=GREEN, font=(FONT_NAME, 45, "normal"), bg=YELLOW)
 label.grid(row= 0, column= 1)
 
-start_button = tkinter.Button(text="Start",highlightthickness=0, height=2)
+start_button = tkinter.Button(text="Start",highlightthickness=0, height=2, command=start_timer)
 start_button.grid(row= 2, column=0)
 
 reset_button = tkinter.Button(text="Reset",highlightthickness=0, height=2)
