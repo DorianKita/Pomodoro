@@ -14,18 +14,25 @@ CHECKMARK = "✔"
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
-# ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
+# ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
+def count_down(count):
+    canvas.itemconfig(timer_text, text= count)
+    if count > 0:
+        window.after(1000, count_down, count -1)
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = tkinter.Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
 
+
 canvas = tkinter.Canvas(width=200,height=224, bg=YELLOW, highlightthickness=0)
 tomato_img = tkinter.PhotoImage(file="tomato.png")
 canvas.create_image(100,112, image= tomato_img)
-canvas.create_text(100,130, text="00:00", font=(FONT_NAME, 30, "bold"), fill="white")
+timer_text = canvas.create_text(100,130, text="00:00", font=(FONT_NAME, 30, "bold"), fill="white")
 canvas.grid(row= 1, column= 1)
+
+
 
 label = tkinter.Label(text="Timer", fg=GREEN, font=(FONT_NAME, 45, "normal"), bg=YELLOW)
 label.grid(row= 0, column= 1)
