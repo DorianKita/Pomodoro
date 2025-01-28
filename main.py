@@ -10,7 +10,6 @@ FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
-CHECKMARK = "✔"
 reps = 0
 # ---------------------------- TIMER RESET ------------------------------- # 
 
@@ -26,12 +25,14 @@ def start_timer():
     if reps % 8 ==0:
         count_down(long_break_secs)
         label.config(text="Break", fg=GREEN)
+
     elif reps % 2 == 0:
         count_down(short_break_secs)
         label.config(text="Break", fg=PINK)
     else:
         count_down(work_secs)
         label.config(text="Work", fg=RED)
+
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
 
@@ -45,7 +46,11 @@ def count_down(count):
     if count > 0:
         window.after(1000, count_down, count -1)
     else:
+        mark = ""
         start_timer()
+        for _ in range(floor(reps / 2)):
+            mark += "✔"
+        checkmark.config(text=mark)
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = tkinter.Tk()
@@ -68,7 +73,7 @@ start_button.grid(row= 2, column=0)
 reset_button = tkinter.Button(text="Reset",highlightthickness=0, height=2)
 reset_button.grid(row= 2, column=2)
 
-checkmark = tkinter.Label(text=CHECKMARK, foreground=GREEN, bg=YELLOW, font=(FONT_NAME, 30, "normal"))
+checkmark = tkinter.Label(foreground=GREEN, bg=YELLOW, font=(FONT_NAME, 30, "normal"))
 checkmark.grid(row= 3, column=1)
 
 
