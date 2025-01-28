@@ -30,10 +30,10 @@ canvas.grid(row= 1, column= 1)
 label = tkinter.Label(text="Timer", fg=GREEN, font=(FONT_NAME, 45, "normal"), bg=YELLOW)
 label.grid(row= 0, column= 1)
 
-start_button = tkinter.Button(text="Start")
+start_button = tkinter.Button(text="Start",highlightthickness=0, height=2)
 start_button.grid(row= 2, column=0)
 
-reset_button = tkinter.Button(text="Reset")
+reset_button = tkinter.Button(text="Reset",highlightthickness=0, height=2)
 reset_button.grid(row= 2, column=2)
 
 checkmark = tkinter.Label(text=CHECKMARK, foreground=GREEN, bg=YELLOW, font=(FONT_NAME, 30, "normal"))
